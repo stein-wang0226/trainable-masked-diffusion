@@ -1,0 +1,71 @@
+model:
+  family: llada
+  n_dims: 10
+  n_positions: 101
+  n_prompt: 10
+  n_respond: 20
+  n_embd: 256
+  n_layers: 12
+  n_heads: 8
+  mlp_ratio: 4.0
+  block_group_size: 1
+  mask_epsilon: 0.1
+  loss_weight_type: 1/t
+  train_mask_ratio: 1.0
+  eval_mask_ratio: 1.0
+  eval_mask_mode: fixed
+  use_prompt_context: true
+  inference:
+    use_multistep_inference: false
+    steps: 10
+    scheduler: linear
+    confidence_alg: entropy
+training:
+  task: linear_regression
+  data: gaussian
+  batch_size: 64
+  learning_rate: 0.0001
+  weight_decay: 0.0
+  train_steps: 1000000
+  save_every_steps: 20000
+  w_type: gaussian
+  num_tasks: null
+  num_training_examples: null
+  sequence_mode: sequential
+  task_kwargs: {}
+  log_interval: 200
+  validation:
+    batch_count: 50
+    batch_size: 64
+    seed: 1234
+    eval_every_steps: 5000
+  curriculum:
+    dims:
+      start: 10
+      end: 10
+      inc: 0
+      interval: 10000000
+    points:
+      start: 20
+      end: 20
+      inc: 0
+      interval: 10000000
+  random_seed: 42
+out_dir: ./outputs/batch_checkpoints/llada_standard_D10_P10_R20_seed42
+wandb:
+  log: true
+  project: in-context-learning-prompt-respond
+  name: llada_standard_D10_P10_R20_seed42
+  group: llada_standard
+  log_every_steps: 200
+  notes: 'Standard experiment: LLADA, D=10, P=10, R=20, seed=42'
+  tags:
+  - llada
+  - standard
+  - sequential
+  - D10
+  - P10
+  - R20
+  - seed42
+evaluation:
+  use_autoregressive_eval: false

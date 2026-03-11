@@ -1,0 +1,76 @@
+model:
+  family: llada_block
+  n_dims: 10
+  n_positions: 101
+  n_prompt: 20
+  n_respond: 20
+  n_embd: 256
+  n_layers: 12
+  n_heads: 8
+  mlp_ratio: 4.0
+  block_group_size: 1
+  mask_epsilon: 0.1
+  loss_weight_type: 1/t
+  train_mask_ratio: 1.0
+  eval_mask_ratio: 1.0
+  eval_mask_mode: fixed
+  use_prompt_context: true
+  use_block_diffusion: true
+  inference:
+    use_multistep_inference: false
+    steps: 10
+    scheduler: linear
+    confidence_alg: entropy
+  block_size: 4
+training:
+  task: linear_regression
+  data: gaussian
+  batch_size: 64
+  learning_rate: 0.0001
+  weight_decay: 0.0
+  train_steps: 1000000
+  save_every_steps: 5000
+  w_type: gaussian
+  num_tasks: null
+  num_training_examples: null
+  sequence_mode: sequential
+  task_kwargs: {}
+  log_interval: 200
+  validation:
+    batch_count: 50
+    batch_size: 64
+    seed: 1234
+    eval_every_steps: 5000
+  curriculum:
+    dims:
+      start: 10
+      end: 10
+      inc: 0
+      interval: 10000000
+    points:
+      start: 20
+      end: 20
+      inc: 0
+      interval: 10000000
+  random_seed: 2
+out_dir: ./outputs/batch_checkpoints_block_size_comp/llada_block_bs4_standard_D10_P20_R20_seed2
+wandb:
+  log: true
+  project: in-context-learning-prompt-respond-bs_comp
+  name: llada_block_bs4_standard_D10_P20_R20_seed2
+  group: llada_block_standard_bs4
+  log_every_steps: 200
+  notes: 'Standard experiment: LLaDABlock (block_size=4), D=10, P=20, R=20, sequential,
+    seed=2'
+  tags:
+  - llada_block
+  - standard
+  - block_diffusion
+  - block_size_4
+  - sequential
+  - D10
+  - P20
+  - R20
+  - seed2
+evaluation:
+  use_autoregressive_eval: false

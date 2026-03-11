@@ -1,0 +1,34 @@
+model:
+  n_layer: 12
+  n_embd: 256
+  n_head: 8
+  n_positions: 256
+  vocab_size: 128
+  family: "qwen"
+  diffusion_steps: 100
+
+data:
+  num_nodes: 100
+  deg: 3
+  path_len: 5
+  # TODO: Replace with your actual data paths
+  train_data_path: "/path/to/your/graphs/deg_3_path_5_nodes_100_train_800000.txt"
+  test_data_path: "/path/to/your/graphs/deg_3_path_5_nodes_100_test_80000.txt"
+
+training:
+  batch_size: 64
+  learning_rate: 2e-4
+  max_steps: 500000
+  warmup_steps: 1000
+  save_every_steps: 5000
+  eval_every_steps: 1000
+  mixed_precision: "bf16"
+
+wandb:
+  project: "pathfinding-final-submit"
+  group: "qwen-scaling-study"
+  name: "qwen_deg3_len5"
+  entity: "your-wandb-entity"  # TODO: Replace with your wandb entity
+
+# TODO: Replace with your desired output directory
+out_dir: "./outputs/pathfinding_qwen_35"

@@ -1,5 +1,5 @@
 
-```markdown
+
 # Blockwise Diffusion Trainability
 
 This repository provides the official implementation for the paper **"On Trainability of Masked Diffusion Language Models with Blockwise Locality"**. 
@@ -142,4 +142,3 @@ bibtex
   year={2024}
 }
 
-```
